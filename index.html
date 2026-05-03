@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Muhammad Suleman - Portfolio</title>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+    }
+
+    body {
+        background: #0f172a;
+        color: #e2e8f0;
+        line-height: 1.6;
+        scroll-behavior: smooth;
+    }
+
+    header {
+        padding: 70px 20px;
+        text-align: center;
+        background: linear-gradient(135deg, #1e293b, #0f172a);
+        animation: fadeDown 1s ease-out;
+    }
+
+    header h1 {
+        font-size: 2.7rem;
+        margin-bottom: 10px;
+        animation: fadeIn 1.2s ease-in;
+    }
+
+    header p {
+        color: #94a3b8;
+        font-size: 1.1rem;
+        animation: fadeIn 1.5s ease-in;
+    }
+
+    .container {
+        max-width: 900px;
+        margin: auto;
+        padding: 40px 20px;
+    }
+
+    section {
+        margin-bottom: 40px;
+        opacity: 0;
+        transform: translateY(30px);
+        animation: fadeUp 1s forwards;
+    }
+
+    section:nth-child(1) { animation-delay: 0.2s; }
+    section:nth-child(2) { animation-delay: 0.4s; }
+    section:nth-child(3) { animation-delay: 0.6s; }
+    section:nth-child(4) { animation-delay: 0.8s; }
+    section:nth-child(5) { animation-delay: 1s; }
+    section:nth-child(6) { animation-delay: 1.2s; }
+
+    h2 {
+        margin-bottom: 15px;
+        color: #60a5fa;
+        font-size: 1.5rem;
+        position: relative;
+    }
+
+    h2::after {
+        content: '';
+        width: 50px;
+        height: 3px;
+        background: #38bdf8;
+        position: absolute;
+        left: 0;
+        bottom: -5px;
+        border-radius: 5px;
+    }
+
+    .card {
+        background: #1e293b;
+        padding: 20px;
+        border-radius: 10px;
+        margin-top: 10px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+    }
+
+    ul {
+        margin-top: 10px;
+        padding-left: 20px;
+    }
+
+    .skills span {
+        display: inline-block;
+        background: #334155;
+        padding: 6px 12px;
+        margin: 5px;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        transition: 0.3s;
+    }
+
+    .skills span:hover {
+        background: #38bdf8;
+        color: #0f172a;
+    }
+
+    footer {
+        text-align: center;
+        padding: 20px;
+        color: #94a3b8;
+        border-top: 1px solid #1e293b;
+    }
+
+    .highlight {
+        color: #38bdf8;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    @keyframes fadeDown {
+        from { opacity: 0; transform: translateY(-30px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeUp {
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+</style>
+</head>
+<body>
+
+<header>
+    <h1>Muhammad Suleman</h1>
+    <p>BS Computer Science Student | 4th Semester | NUML University, Islamabad</p>
+</header>
+
+<div class="container">
+
+    <section>
+        <h2>About Me</h2>
+        <div class="card">
+            <p>
+                I am an undergraduate student pursuing BS Computer Science. I am currently in my fourth semester in the afternoon program at NUML University, Islamabad Main Campus. I am passionate about learning new things in computer science and continuously improving my skills.
+            </p>
+        </div>
+    </section>
+
+    <section>
+        <h2>My Goal</h2>
+        <div class="card">
+            <p>
+                My goal is to join a professional environment where I can contribute fully, learn industry practices, and grow into a skilled software developer while taking on real-world challenges.
+            </p>
+        </div>
+    </section>
+
+    <section>
+        <h2>Skills</h2>
+        <div class="card skills">
+            <span>HTML</span>
+            <span>CSS</span>
+            <span>JavaScript basics</span>
+            <span>C++ Basics</span>
+            <span>Problem Solving</span>
+            <span>Learning Mindset</span>
+        </div>
+    </section>
+
+    <section>
+        <h2>Projects</h2>
+        <div class="card">
+            <h3>Departmental Store Management System</h3>
+            <p>
+                A complete system designed to manage a departmental store with two main roles:
+            </p>
+            <ul>
+                <li><b>Admin Portal:</b> Manage inventory, restock items, update product details, and monitor stock levels.</li>
+                <li><b>Customer Interface:</b> Browse items, add products to cart, and complete purchases efficiently.</li>
+            </ul>
+            <p>
+                This project helped me understand real-world system design, role-based access, and basic inventory management logic.
+            </p>
+        </div>
+    </section>
+
+    <section>
+        <h2>Education</h2>
+        <div class="card">
+            <p><span class="highlight">BS Computer Science</span></p>
+            <p>NUML University, Islamabad</p>
+            <p>4th Semester (Afternoon Program)</p>
+        </div>
+    </section>
+
+    <section>
+        <h2>Contact</h2>
+        <div class="card">
+            <p>Email: msuleman.net@gmail.com</p>
+            <p>Phone: +92 331 9979578</p>
+            <p>Location: Rawalpindi / Islamabad, Pakistan</p>
+        </div>
+    </section>
+
+</div>
+
+<footer>
+    <p>© 2026 Muhammad Suleman | Portfolio Website</p>
+</footer>
+
+</body>
+</html>
