@@ -3,218 +3,651 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Muhammad Suleman - Portfolio</title>
+<title>Muhammad Suleman — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: Arial, sans-serif;
-    }
+  :root {
+    --bg: #0a0e16;
+    --bg-alt: #0d1320;
+    --surface: #121a2b;
+    --surface-hi: #17203a;
+    --border: #232d45;
+    --text: #e7ecf5;
+    --text-dim: #8e9bb3;
+    --text-faint: #5c6885;
+    --cyan: #52e0c4;
+    --cyan-dim: #2c8f7c;
+    --amber: #f2a65e;
+    --radius: 12px;
+  }
 
-    body {
-        background: #0f172a;
-        color: #e2e8f0;
-        line-height: 1.6;
-        scroll-behavior: smooth;
-    }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    header {
-        padding: 70px 20px;
-        text-align: center;
-        background: linear-gradient(135deg, #1e293b, #0f172a);
-        animation: fadeDown 1s ease-out;
-    }
+  html { scroll-behavior: smooth; }
 
-    header h1 {
-        font-size: 2.7rem;
-        margin-bottom: 10px;
-        animation: fadeIn 1.2s ease-in;
-    }
+  body {
+    background: var(--bg);
+    background-image:
+      radial-gradient(ellipse 900px 500px at 15% -10%, rgba(82,224,196,0.08), transparent),
+      radial-gradient(ellipse 700px 500px at 100% 10%, rgba(242,166,94,0.06), transparent);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
 
-    header p {
-        color: #94a3b8;
-        font-size: 1.1rem;
-        animation: fadeIn 1.5s ease-in;
-    }
+  a { color: inherit; text-decoration: none; }
 
-    .container {
-        max-width: 900px;
-        margin: auto;
-        padding: 40px 20px;
-    }
+  .mono { font-family: 'JetBrains Mono', monospace; }
 
-    section {
-        margin-bottom: 40px;
-        opacity: 0;
-        transform: translateY(30px);
-        animation: fadeUp 1s forwards;
-    }
+  ::selection { background: var(--cyan); color: #06120f; }
 
-    section:nth-child(1) { animation-delay: 0.2s; }
-    section:nth-child(2) { animation-delay: 0.4s; }
-    section:nth-child(3) { animation-delay: 0.6s; }
-    section:nth-child(4) { animation-delay: 0.8s; }
-    section:nth-child(5) { animation-delay: 1s; }
-    section:nth-child(6) { animation-delay: 1.2s; }
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 6vw;
+    background: rgba(10,14,22,0.75);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+  }
 
-    h2 {
-        margin-bottom: 15px;
-        color: #60a5fa;
-        font-size: 1.5rem;
-        position: relative;
-    }
+  .logo {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--text);
+  }
+  .logo span { color: var(--cyan); }
 
-    h2::after {
-        content: '';
-        width: 50px;
-        height: 3px;
-        background: #38bdf8;
-        position: absolute;
-        left: 0;
-        bottom: -5px;
-        border-radius: 5px;
-    }
+  .nav-links {
+    display: flex;
+    gap: 34px;
+    list-style: none;
+  }
 
-    .card {
-        background: #1e293b;
-        padding: 20px;
-        border-radius: 10px;
-        margin-top: 10px;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
+  .nav-links a {
+    position: relative;
+    font-size: 0.9rem;
+    color: var(--text-dim);
+    font-family: 'JetBrains Mono', monospace;
+    transition: color 0.25s ease;
+    padding: 4px 0;
+  }
 
-    .card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 20px rgba(0,0,0,0.4);
-    }
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 0%;
+    height: 2px;
+    background: var(--cyan);
+    transition: width 0.3s ease;
+  }
 
-    ul {
-        margin-top: 10px;
-        padding-left: 20px;
-    }
+  .nav-links a:hover {
+    color: var(--text);
+  }
+  .nav-links a:hover::after { width: 100%; }
 
-    .skills span {
-        display: inline-block;
-        background: #334155;
-        padding: 6px 12px;
-        margin: 5px;
-        border-radius: 20px;
-        font-size: 0.9rem;
-        transition: 0.3s;
-    }
+  @media (max-width: 700px) {
+    .nav-links { display: none; }
+  }
 
-    .skills span:hover {
-        background: #38bdf8;
-        color: #0f172a;
-    }
+  /* ---------- HERO ---------- */
+  header {
+    padding: 110px 6vw 90px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
 
-    footer {
-        text-align: center;
-        padding: 20px;
-        color: #94a3b8;
-        border-top: 1px solid #1e293b;
-    }
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--cyan);
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 22px;
+    opacity: 0;
+    animation: rise 0.7s ease forwards;
+  }
 
-    .highlight {
-        color: #38bdf8;
-    }
+  .eyebrow::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--cyan);
+    box-shadow: 0 0 12px 2px rgba(82,224,196,0.7);
+    animation: pulse 2.2s infinite;
+  }
 
-    @keyframes fadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
-    }
+  header h1 {
+    font-size: clamp(2.6rem, 6vw, 4.4rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    max-width: 850px;
+    opacity: 0;
+    animation: rise 0.8s ease 0.1s forwards;
+  }
 
-    @keyframes fadeDown {
-        from { opacity: 0; transform: translateY(-30px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
+  header h1 .accent { color: var(--cyan); }
 
-    @keyframes fadeUp {
-        to { opacity: 1; transform: translateY(0); }
-    }
+  header .role {
+    margin-top: 20px;
+    font-size: 1.15rem;
+    color: var(--text-dim);
+    max-width: 640px;
+    opacity: 0;
+    animation: rise 0.8s ease 0.25s forwards;
+  }
 
+  .hero-cta {
+    margin-top: 40px;
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: rise 0.8s ease 0.4s forwards;
+  }
+
+  .btn {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.88rem;
+    padding: 13px 24px;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.25s ease;
+    border: 1px solid transparent;
+  }
+
+  .btn-primary {
+    background: var(--cyan);
+    color: #06120f;
+    font-weight: 600;
+  }
+  .btn-primary:hover {
+    background: #6ff0d6;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(82,224,196,0.25);
+  }
+
+  .btn-ghost {
+    border-color: var(--border);
+    color: var(--text);
+  }
+  .btn-ghost:hover {
+    border-color: var(--cyan);
+    color: var(--cyan);
+    transform: translateY(-2px);
+  }
+
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.35; }
+  }
+
+  section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 70px 6vw;
+  }
+
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-bottom: 40px;
+  }
+
+  .section-head .tag {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--text-faint);
+    font-size: 0.85rem;
+  }
+
+  .section-head h2 {
+    font-size: 1.7rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+
+  .section-head::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 50px;
+    align-items: start;
+  }
+
+  .about-grid p {
+    color: var(--text-dim);
+    font-size: 1.02rem;
+  }
+  .about-grid p + p { margin-top: 16px; }
+
+  .fact-list {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    border-left: 1px solid var(--border);
+    padding-left: 24px;
+  }
+
+  .fact-list .k {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--text-faint);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .fact-list .v { font-size: 0.98rem; margin-top: 3px; }
+
+  @media (max-width: 750px) {
+    .about-grid { grid-template-columns: 1fr; }
+  }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 22px;
+  }
+
+  .skill-group {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 22px;
+    transition: border-color 0.3s ease, transform 0.3s ease;
+  }
+  .skill-group:hover {
+    border-color: var(--cyan-dim);
+    transform: translateY(-3px);
+  }
+
+  .skill-group h3 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.82rem;
+    color: var(--cyan);
+    margin-bottom: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .pill-row { display: flex; flex-wrap: wrap; gap: 8px; }
+
+  .pill {
+    font-size: 0.85rem;
+    padding: 6px 13px;
+    border-radius: 20px;
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    transition: all 0.25s ease;
+    cursor: default;
+  }
+  .pill:hover {
+    background: var(--cyan);
+    border-color: var(--cyan);
+    color: #06120f;
+    transform: translateY(-2px);
+  }
+
+  .project-list {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+  }
+
+  .project-card {
+    position: relative;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 30px;
+    overflow: hidden;
+    transition: transform 0.35s ease, border-color 0.35s ease, background 0.35s ease;
+  }
+
+  .project-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(500px circle at var(--mx,50%) var(--my,0%), rgba(82,224,196,0.10), transparent 60%);
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    pointer-events: none;
+  }
+
+  .project-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--cyan-dim);
+    background: var(--surface-hi);
+  }
+  .project-card:hover::before { opacity: 1; }
+
+  .project-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+  }
+
+  .project-card h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+  }
+
+  .project-stack {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--amber);
+  }
+
+  .project-card ul {
+    margin-top: 14px;
+    padding-left: 20px;
+    color: var(--text-dim);
+    font-size: 0.96rem;
+  }
+  .project-card li + li { margin-top: 6px; }
+
+  .edu-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 26px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 14px;
+    transition: border-color 0.3s ease;
+  }
+  .edu-card:hover { border-color: var(--cyan-dim); }
+
+  .edu-card h3 { font-size: 1.1rem; font-weight: 700; }
+  .edu-card .school { color: var(--text-dim); margin-top: 4px; font-size: 0.95rem; }
+
+  .edu-badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--cyan);
+    border: 1px solid var(--cyan-dim);
+    padding: 6px 14px;
+    border-radius: 20px;
+    white-space: nowrap;
+  }
+
+  .contact-box {
+    background: linear-gradient(135deg, var(--surface), var(--bg-alt));
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 50px;
+    text-align: center;
+  }
+
+  .contact-box h2 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin-bottom: 12px;
+  }
+  .contact-box p {
+    color: var(--text-dim);
+    max-width: 480px;
+    margin: 0 auto 30px;
+  }
+
+  .contact-links {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .contact-links a {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.88rem;
+    border: 1px solid var(--border);
+    padding: 12px 20px;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.25s ease;
+  }
+  .contact-links a:hover {
+    border-color: var(--cyan);
+    color: var(--cyan);
+    transform: translateY(-2px);
+  }
+
+  footer {
+    text-align: center;
+    padding: 34px 20px;
+    color: var(--text-faint);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.82rem;
+    border-top: 1px solid var(--border);
+  }
+
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--cyan);
+    outline-offset: 3px;
+  }
 </style>
 </head>
 <body>
 
+<nav>
+  <div class="logo">suleman<span>.dev</span></div>
+  <ul class="nav-links">
+    <li><a href="#about">about</a></li>
+    <li><a href="#skills">skills</a></li>
+    <li><a href="#projects">projects</a></li>
+    <li><a href="#education">education</a></li>
+    <li><a href="#contact">contact</a></li>
+  </ul>
+</nav>
+
 <header>
-    <h1>Muhammad Suleman</h1>
-    <p>BS Computer Science Student | 4th Semester | NUML University, Islamabad</p>
+  <div class="eyebrow mono">available for internships &amp; entry-level roles</div>
+  <h1>Muhammad Suleman —<br>building <span class="accent">web systems</span> and teaching machines to <span class="accent">see</span>.</h1>
+  <p class="role">Computer Science student building backend systems with Laravel and Node.js, and exploring applied machine learning through a face recognition pipeline built from the ground up.</p>
+  <div class="hero-cta">
+    <a href="#projects" class="btn btn-primary">View Projects →</a>
+    <a href="#contact" class="btn btn-ghost">Get In Touch</a>
+  </div>
 </header>
 
-<div class="container">
+<section id="about" class="reveal">
+  <div class="section-head"><span class="tag mono"></span><h2>About Me</h2></div>
+  <div class="about-grid">
+    <div>
+      <p>I'm an undergraduate Computer Science student at NUML University, Islamabad, currently in my fourth semester. I like understanding systems from the ground up — whether that's designing a database schema before writing a single API route, or working through the math behind a face detector before touching a deep learning library.</p>
+      <p>My goal is to join a team where I can contribute from day one, absorb real engineering practices, and grow into a developer who can be trusted with hard problems.</p>
+    </div>
+    <div class="fact-list">
+      <div><div class="k mono">Focus</div><div class="v">Backend Development &amp; Applied ML</div></div>
+      <div><div class="k mono">Studying</div><div class="v">BS Computer Science, NUML Islamabad</div></div>
+      <div><div class="k mono">Based in</div><div class="v">Rawalpindi / Islamabad, Pakistan</div></div>
+      <div><div class="k mono">Status</div><div class="v">Open to internships</div></div>
+    </div>
+  </div>
+</section>
 
-    <section>
-        <h2>About Me</h2>
-        <div class="card">
-            <p>
-                I am an undergraduate student pursuing BS Computer Science. I am currently in my fourth semester in the afternoon program at NUML University, Islamabad Main Campus. I am passionate about learning new things in computer science and continuously improving my skills.
-            </p>
-        </div>
-    </section>
+<section id="skills" class="reveal">
+  <div class="section-head"><span class="tag mono"></span><h2>Skills</h2></div>
+  <div class="skills-grid">
+    <div class="skill-group">
+      <h3>Languages &amp; Frameworks</h3>
+      <div class="pill-row">
+        <span class="pill">PHP / Laravel</span>
+        <span class="pill">JavaScript</span>
+        <span class="pill">Node.js / Express</span>
+        <span class="pill">React</span>
+        <span class="pill">Python</span>
+        <span class="pill">HTML / CSS</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <h3>Databases</h3>
+      <div class="pill-row">
+        <span class="pill">MySQL</span>
+        <span class="pill">Database Design</span>
+        <span class="pill">Eloquent ORM</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <h3>Tools &amp; Practices</h3>
+      <div class="pill-row">
+        <span class="pill">Git</span>
+        <span class="pill">REST APIs</span>
+        <span class="pill">Unit Testing</span>
+        <span class="pill">Code Review</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <h3>Machine Learning</h3>
+      <div class="pill-row">
+        <span class="pill">OpenCV</span>
+        <span class="pill">DNN Face Detection</span>
+        <span class="pill">Flask</span>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <section>
-        <h2>My Goal</h2>
-        <div class="card">
-            <p>
-                My goal is to join a professional environment where I can contribute fully, learn industry practices, and grow into a skilled software developer while taking on real-world challenges.
-            </p>
-        </div>
-    </section>
+<section id="projects" class="reveal">
+  <div class="section-head"><span class="tag mono"></span><h2>Projects</h2></div>
+  <div class="project-list">
 
-    <section>
-        <h2>Skills</h2>
-        <div class="card skills">
-            <span>HTML</span>
-            <span>CSS</span>
-            <span>JavaScript basics</span>
-            <span>C++ Basics</span>
-            <span>Problem Solving</span>
-            <span>Learning Mindset</span>
-        </div>
-    </section>
+    <div class="project-card" onmousemove="tilt(event,this)">
+      <div class="project-top">
+        <h3>Hospital Management REST API</h3>
+        <span class="project-stack mono">Laravel · PHP · MySQL</span>
+      </div>
+      <p style="color:var(--text-dim)">Backend for a hospital management system, built as part of a 3-person team. Owned the entire database layer.</p>
+      <ul>
+        <li>Designed the relational schema, migrations, and Eloquent models</li>
+        <li>Built seeders for realistic test data</li>
+        <li>Implemented RESTful CRUD endpoints across core hospital entities</li>
+      </ul>
+    </div>
 
-    <section>
-        <h2>Projects</h2>
-        <div class="card">
-            <h3>Departmental Store Management System</h3>
-            <p>
-                A complete system designed to manage a departmental store with two main roles:
-            </p>
-            <ul>
-                <li><b>Admin Portal:</b> Manage inventory, restock items, update product details, and monitor stock levels.</li>
-                <li><b>Customer Interface:</b> Browse items, add products to cart, and complete purchases efficiently.</li>
-            </ul>
-            <p>
-                This project helped me understand real-world system design, role-based access, and basic inventory management logic.
-            </p>
-        </div>
-    </section>
+    <div class="project-card" onmousemove="tilt(event,this)">
+      <div class="project-top">
+        <h3>Departmental Store Web App</h3>
+        <span class="project-stack mono">Node.js · Express · MySQL · JavaScript</span>
+      </div>
+      <p style="color:var(--text-dim)">A full-stack store management app with separate customer and admin experiences, prepared for cloud deployment.</p>
+      <ul>
+        <li>Built a vanilla JS frontend: product browsing, cart sidebar, product modals</li>
+        <li>Built an admin portal for inventory and stock management</li>
+        <li>Designed the Express/MySQL backend and prepared deployment on Railway</li>
+      </ul>
+    </div>
 
-    <section>
-        <h2>Education</h2>
-        <div class="card">
-            <p><span class="highlight">BS Computer Science</span></p>
-            <p>NUML University, Islamabad</p>
-            <p>4th Semester (Afternoon Program)</p>
-        </div>
-    </section>
+    <div class="project-card" onmousemove="tilt(event,this)">
+      <div class="project-top">
+        <h3>Face Recognition System</h3>
+        <span class="project-stack mono">Python · OpenCV · Deep Learning</span>
+      </div>
+      <p style="color:var(--text-dim)">A face detection and recognition pipeline built incrementally, from classical computer vision to deep learning.</p>
+      <ul>
+        <li>Started with OpenCV Haar Cascades, upgraded to a DNN-based SSD + ResNet-10 detector</li>
+        <li>Currently adding face alignment and embedding generation (ArcFace/InsightFace)</li>
+        <li>Designing FAISS-based similarity search, served through a Flask API</li>
+      </ul>
+    </div>
 
-    <section>
-        <h2>Contact</h2>
-        <div class="card">
-            <p>Email: msuleman.net@gmail.com</p>
-            <p>Phone: +92 331 9979578</p>
-            <p>Location: Rawalpindi / Islamabad, Pakistan</p>
-        </div>
-    </section>
+  </div>
+</section>
 
-</div>
+<section id="education" class="reveal">
+  <div class="section-head"><span class="tag mono"></span><h2>Education</h2></div>
+  <div class="edu-card">
+    <div>
+      <h3>BS Computer Science</h3>
+      <div class="school">National University of Modern Languages (NUML), Islamabad — 4th Semester, Afternoon Program</div>
+    </div>
+    <span class="edu-badge">Expected 2028</span>
+  </div>
+</section>
+
+<section id="contact" class="reveal">
+  <div class="contact-box">
+    <h2>Let's build something.</h2>
+    <p>Open to internships and entry-level software engineering roles. Reach out any time.</p>
+    <div class="contact-links">
+      <a href="mailto:msuleman.net@gmail.com">✉ msuleman.net@gmail.com</a>
+      <a href="tel:+923319979578">☎ +92 331 9979578</a>
+      <a href="#" onclick="return false;">📍 Rawalpindi / Islamabad, PK</a>
+    </div>
+  </div>
+</section>
 
 <footer>
-    <p>© 2026 Muhammad Suleman | Portfolio Website</p>
+  © 2026 Muhammad Suleman — Built with HTML, CSS &amp; a lot of coffee.
 </footer>
+
+<script>
+
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => io.observe(el));
+
+  function tilt(e, el) {
+    const rect = el.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    el.style.setProperty('--mx', x + '%');
+    el.style.setProperty('--my', y + '%');
+  }
+</script>
 
 </body>
 </html>
